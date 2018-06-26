@@ -58,6 +58,20 @@ def md2pdf():
     pathname = make_named_pdf(markdown, filename)
     return send_file(pathname, attachment_filename=filename)
 
+def make_named_docx(markdown, filename):
+    clear_pdf_directory()
+    pathname = "temp_pdfs/" + filename
+    pypandoc.convert_text(markdown, "docx", format="md", outputfile=pathname)
+    return pathname
+
+@app.route("/mddocx", methods=['GET', 'POST'])
+def md2pdf():
+    if request.method == 'GET':
+        return "the endpoint is findable, now send a post request"
+    filename = request.form["filename"]
+    markdown = request.form["markdown"]
+    pathname = make_named_docx(markdown, filename)
+    return send_file(pathname, attachment_filename=filename)
 
 
 
