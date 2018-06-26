@@ -50,7 +50,7 @@ def make_named_pdf(markdown, filename):
     return pathname
 
 @app.route("/mdpdf", methods=['GET', 'POST'])
-def md2pdf():
+def mdpdf():
     if request.method == 'GET':
         return "the endpoint is findable, now send a post request"
     filename = request.form["filename"]
@@ -65,7 +65,7 @@ def make_named_docx(markdown, filename):
     return pathname
 
 @app.route("/mddocx", methods=['GET', 'POST'])
-def md2pdf():
+def mddocx():
     if request.method == 'GET':
         return "the endpoint is findable, now send a post request"
     filename = request.form["filename"]
