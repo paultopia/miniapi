@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, request
 import pypandoc, uuid, os, glob
 
 app = Flask(__name__)
@@ -35,6 +35,12 @@ def pdf():
         filename = make_pdf(md.read())
     return send_file(filename, attachment_filename=filename)
 
+@app.route("/wtf")
+def wtf():
+    print("RUNNING WTF")
+    lastpdf = glob.glob('temp_pdfs/*')[0]
+    return send_file(lastpdf, attachment_filename="wtf.pdf")
+
 ## the actual useful bits
 
 def make_named_pdf(markdown, filename):
@@ -43,8 +49,10 @@ def make_named_pdf(markdown, filename):
     pypandoc.convert_text(markdown, "pdf", format="md", outputfile=pathname)
     return pathname
 
-app.route("md2pdf", methods=['POST'])
+@app.route("/mdpdf", methods=['GET', 'POST'])
 def md2pdf():
+    if request.method == 'GET':
+        return "the endpoint is findable, now send a post request"
     filename = request.form["filename"]
     markdown = request.form["markdown"]
     pathname = make_named_pdf(markdown, filename)
