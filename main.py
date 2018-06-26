@@ -35,6 +35,22 @@ def pdf():
         filename = make_pdf(md.read())
     return send_file(filename, attachment_filename=filename)
 
+## the actual useful bits
+
+def make_named_pdf(markdown, filename):
+    clear_pdf_directory()
+    pathname = "temp_pdfs/" + filename
+    pypandoc.convert_text(markdown, "pdf", format="md", outputfile=pathname)
+    return pathname
+
+app.route("md2pdf", methods=['POST'])
+def md2pdf():
+    filename = request.form["filename"]
+    markdown = request.form["markdown"]
+    pathname = make_named_pdf(markdown, filename)
+    return send_file(pathname, attachment_filename=filename)
+
+
 
 
 if __name__ == "__main__":
