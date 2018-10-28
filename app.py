@@ -1,7 +1,10 @@
 from flask import Flask, send_file, request
-import pypandoc, uuid, os, glob
+# import pypandoc
 
+import uuid, os, glob, sys, json
+from flask_heroku import Heroku
 app = Flask(__name__)
+heroku = Heroku(app)
 
 testmd = '''
 # Hello Paul!
@@ -9,12 +12,14 @@ testmd = '''
 You should check out [your own webpage](https://gowder.io)!
 '''
 
-testhtml = pypandoc.convert_text(testmd, 'html', format='md')
+#testhtml = pypandoc.convert_text(testmd, 'html', format='md')
+
 
 
 @app.route("/")
 def hello():
-    return pypandoc.convert_file("test.md", "html")
+    # return pypandoc.convert_file("test.md", "html")
+    return "flask works"
 
 # let's try making a pdf now.
 
