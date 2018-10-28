@@ -16,7 +16,7 @@ testhtml = pypandoc.convert_text(testmd, 'html', format='md')
 
 
 @app.route("/")
-def testflask():
+def roottest():
     return pypandoc.convert_file("test.md", "html")
 
 
