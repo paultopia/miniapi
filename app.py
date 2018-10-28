@@ -12,12 +12,16 @@ testmd = '''
 You should check out [your own webpage](https://gowder.io)!
 '''
 
-#testhtml = pypandoc.convert_text(testmd, 'html', format='md')
-
+testhtml = pypandoc.convert_text(testmd, 'html', format='md')
 
 
 @app.route("/")
-def hello():
+def testflask():
+    return pypandoc.convert_file("test.md", "html")
+
+
+@app.route("/testflask")
+def testflask():
     # return pypandoc.convert_file("test.md", "html")
     return "flask works"
 
