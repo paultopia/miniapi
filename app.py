@@ -1,5 +1,5 @@
 from flask import Flask, send_file, request
-# import pypandoc
+import pypandoc
 
 import uuid, os, glob, sys, json
 from flask_heroku import Heroku
