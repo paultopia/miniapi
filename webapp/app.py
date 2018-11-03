@@ -1,7 +1,7 @@
-from flask import Flask, send_file, request, tempfile
+from flask import Flask, send_file, request
 import pypandoc
 
-import uuid, os, glob, sys, json
+import os, sys, json
 from flask_heroku import Heroku
 app = Flask(__name__)
 heroku = Heroku(app)
