@@ -23,5 +23,5 @@ USER myuser
 
 # Run the app.  CMD is required to run on Heroku
 # $PORT is set by Heroku			
-CMD gunicorn --bind 0.0.0.0:$PORT wsgi 
+CMD gunicorn --bind 0.0.0.0:$PORT app:app 
 # web: gunicorn app:app  ????
