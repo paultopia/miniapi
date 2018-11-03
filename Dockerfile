@@ -4,13 +4,10 @@ FROM ubuntu:18.04
 # Install python and pip and pandoc
 RUN apt-get update && apt-get install -y apt-transport-https
 RUN apt-get install -y python3 python3-pip bash pandoc texlive
-ADD ./webapp/Pipfile /Pipfile
-ADD ./webapp/Pipfile.lock /Pipfile.lock
-# not sure where to put this, might be easier just to generate a requirements.txt honestly.
+ADD ./webapp/requirements.txt /tmp/requirements.txt
 
 # Install dependencies
-RUN pip3 install --no-cache-dir -q pipenv
-RUN pipenv install --system --deploy
+RUN pip3 install --no-cache-dir -q -r /tmp/requirements.txt
 
 # Add our code
 ADD ./webapp /opt/webapp/
