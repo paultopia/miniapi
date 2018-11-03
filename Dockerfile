@@ -9,7 +9,7 @@ ADD ./webapp/Pipfile.lock /Pipfile.lock
 # not sure where to put this, might be easier just to generate a requirements.txt honestly.
 
 # Install dependencies
-RUN pip3 install --no-cache-dir -q -r pipenv
+RUN pip3 install --no-cache-dir -q pipenv
 RUN pipenv install --system --deploy
 
 # Add our code
