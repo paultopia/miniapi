@@ -22,7 +22,7 @@ def roottest():
 
 @app.route("/testflask")
 def testflask():
-    return "flask works"
+    return "flask works, and so does heroku push from ipad."
 
 # let's try making a pdf now.
 
