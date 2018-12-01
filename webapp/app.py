@@ -1,6 +1,7 @@
 from flask import Flask, send_file, request
 import pypandoc, json
 from filehandling import make_files_sensible
+from conversions import convert
 
 import os, sys, json
 from flask_heroku import Heroku
@@ -99,6 +100,20 @@ def allfiles():
     if fls:
         incoming_files = make_files_sensible(fls)
         return json.dumps(incoming_files, indent=4, sort_keys=True)
+    return "no files"
+
+@app.route("/omniconvert", methods=["POST"])
+def omniconvert():
+    # requires incoming file be called "file in form"
+    fls = request.files
+    if fls:
+        infile = make_files_sensible(fls)["file"]
+        output_format = request.form.get('format', "html")
+        output = convert(infile, output_format)
+        if output["is_file"]:
+            filename = output["filename"]
+            return send_file(filename, attachment_filename=filename)
+        return output["content"]
     return "no files"
 
 ###############################################################

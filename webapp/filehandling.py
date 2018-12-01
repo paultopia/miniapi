@@ -1,7 +1,8 @@
 import pathlib
+from collections import ChainMap
 
 def extension(filename):
-    return pathlib.Path(filename).suffix
+    return pathlib.Path(filename).suffix.replace(".", "")
 
 def stem(filename):
     return pathlib.Path(filename).stem
@@ -22,12 +23,14 @@ def sort_out_file(filetuple):
         filecontent = fc.decode("utf-8")
     except:
         filecontent = fc
-    return {formname: {"filename": filename,
-                       "content": filecontent,
-                       "stem": stem(filename),
-                       "extension": extension(filename),
-                       "formnane": formname}}
+    return {"filename": filename,
+            "content": filecontent,
+            "stem": stem(filename),
+            "extension": extension(filename),
+            "formnane": formname}
 
 def make_files_sensible(flask_files_dict):
-    output = [sort_out_file((k, v)) for k, v in flask_files_dict.items()]
-    return output
+    filelist = {k: sort_out_file((k, v)) for k, v in flask_files_dict.items()}
+    return filelist
+
+# {k:v for d in filelist for k, v in d.items()}  # just flatten the list of dicts
