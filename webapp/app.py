@@ -52,6 +52,24 @@ def get_request_info():
 def seerequest():
     return get_request_info()
 
+def grab_first_md_file():
+    fls = request.files
+    if fls:
+        mds = [x for x in fls.keys() if x.endswith(".md")]
+    if mds:
+        return mds[0]
+    return None
+
+@app.route("mdfile", methods=['POST'])
+def mdfile():
+    themd = grab_first_md_file()
+    mdtext = themd.read
+    returm mdtext
+
+
+###############################################################
+
+
 ## the actual useful bits
 
 def make_named_pdf(markdown, filename):
