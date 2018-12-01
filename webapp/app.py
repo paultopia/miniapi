@@ -73,6 +73,17 @@ def mdfile():
     return "no markdown file"
 
 
+@app.route("/firstfile", methods=['POST'])
+def firstfile():
+    fls = request.files
+    if fls:
+        thefile = list(fls.items())[0][1]
+        filename = thefile.filename
+        content = thefile.read()
+        return filename + "\n\n" + content
+    return "no file"
+
+
 ###############################################################
 
 
