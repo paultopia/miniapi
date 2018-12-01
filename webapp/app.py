@@ -52,15 +52,16 @@ def get_request_info():
 def seerequest():
     return get_request_info()
 
+def find_md_file(filesdict):
+    for k, v in filesdict.items():
+        if v.filename.endswith(".md"):
+            return v
+    return None
+
 def grab_first_md_file():
     fls = request.files
     if fls:
-        print(str(fls))
-        print(str(fls.keys()))
-        mds = [x for x in fls.keys() if x.endswith(".md")]
-        print(mds)
-    if mds:
-        return mds[0]
+        return find_md_file(fls)
     return None
 
 @app.route("/mdfile", methods=['POST'])
