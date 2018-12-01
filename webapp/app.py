@@ -55,7 +55,10 @@ def seerequest():
 def grab_first_md_file():
     fls = request.files
     if fls:
+        print(str(fls))
+        print(str(fls.keys()))
         mds = [x for x in fls.keys() if x.endswith(".md")]
+        print(mds)
     if mds:
         return mds[0]
     return None
@@ -63,8 +66,10 @@ def grab_first_md_file():
 @app.route("/mdfile", methods=['POST'])
 def mdfile():
     themd = grab_first_md_file()
-    mdtext = themd.read
-    return mdtext
+    if themd:
+        mdtext = themd.read
+        return mdtext
+    return "no markdown file"
 
 
 ###############################################################
