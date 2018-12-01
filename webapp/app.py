@@ -45,7 +45,7 @@ def get_request_info():
         thejson = json.dumps(maybe_json)
     else:
         thejson = "no json"
-    output = "args: \n\n " + args + "\n\n form: \n\n" + form + "\n\n files: \n\n" + files + "\n\njson: \n\n" + json
+    output = "args: \n\n " + args + "\n\n form: \n\n" + form + "\n\n files: \n\n" + files + "\n\njson: \n\n" + thejson
     return output
 
 @app.route("/seerequest", methods=['GET', 'POST'])
