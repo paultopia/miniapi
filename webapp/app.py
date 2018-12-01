@@ -8,6 +8,13 @@ from flask_heroku import Heroku
 app = Flask(__name__)
 heroku = Heroku(app)
 
+
+###############################################################
+# TESTING
+###############################################################
+
+
+
 testmd = '''
 # Hello Paul!
 
@@ -102,24 +109,44 @@ def allfiles():
         return json.dumps(incoming_files, indent=4, sort_keys=True)
     return "no files"
 
+
+
+
+
+###############################################################
+# ACTUAL FUNCTIONALITY
+###############################################################
+
+
+
+###############################################################
+# NEW
+###############################################################
+
+
+
 @app.route("/omniconvert", methods=["POST"])
 def omniconvert():
     # requires incoming file be called "file in form"
     fls = request.files
     if fls:
-        infile = make_files_sensible(fls)["file"]
-        output_format = request.form.get('format', "html")
-        output = convert(infile, output_format)
-        if output["is_file"]:
-            filename = output["filename"]
-            return send_file(filename, attachment_filename=filename)
-        return output["content"]
+        infile = make_files_sensible(fls).get("file")
+        if infile:
+            output_format = request.form.get('format', "html")
+            output = convert(infile, output_format)
+            if output["is_file"]:
+                filename = output["filename"]
+                return send_file(filename, attachment_filename=filename)
+            return output["content"]
+        return "must provide a file with form key 'file'."
     return "no files"
 
+
+###############################################################
+# NEW
 ###############################################################
 
 
-## the actual useful bits
 
 def make_named_pdf(markdown, filename):
     pypandoc.convert_text(markdown, "pdf", format="md", outputfile=filename)
