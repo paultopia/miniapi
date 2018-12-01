@@ -36,10 +36,10 @@ def pdf():
         make_pdf(md.read())
     return send_file("output.pdf", attachment_filename="output.pdf")
     
-@app.route("/see_request", methods=['GET', 'POST'])
-def see_request():
-    rq = json.dumps(request.get_json(force=True))
-    return rq
+@app.route("/seerequest", methods=['GET', 'POST'])
+def seerequest():
+    print(json.dumps(request.get_json(force=True)))
+    return "check the logs"
 
 ## the actual useful bits
 
