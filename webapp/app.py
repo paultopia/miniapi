@@ -60,7 +60,7 @@ def grab_first_md_file():
         return mds[0]
     return None
 
-@app.route("mdfile", methods=['POST'])
+@app.route("/mdfile", methods=['POST'])
 def mdfile():
     themd = grab_first_md_file()
     mdtext = themd.read
