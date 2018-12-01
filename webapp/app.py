@@ -40,7 +40,12 @@ def get_request_info():
     args = str(request.args)
     form = str(request.form)
     files = str(request.files)
-    output = "args: \n\n " + args + "\n\n form: \n\n" + form + "\n\n files:" + files
+    maybe_json = request.get_json(silent=True, cache=False)
+    if maybe_json:
+        json = maybe_json
+    else:
+        json = "no json"
+    output = "args: \n\n " + args + "\n\n form: \n\n" + form + "\n\n files: \n\n" + files + "\n\njson: \n\n" + json
     return output
 
 @app.route("/seerequest", methods=['GET', 'POST'])
