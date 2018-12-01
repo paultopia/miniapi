@@ -1,5 +1,6 @@
 from flask import Flask, send_file, request
 import pypandoc, json
+from filehandling import make_files_sensible
 
 import os, sys, json
 from flask_heroku import Heroku
@@ -92,6 +93,13 @@ def firstfile():
         return filename + "\n\n" + content
     return "no file"
 
+@app.route("/allfiles", methods=["POST"])
+def allfiles():
+    fls = request.files
+    if fls:
+        incoming_files = make_files_sensible(fls)
+        return json.dumps(incoming_files, indent=4, sort_keys=True)
+    return "no files"
 
 ###############################################################
 
