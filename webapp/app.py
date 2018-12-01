@@ -78,8 +78,17 @@ def firstfile():
     fls = request.files
     if fls:
         thefile = list(fls.items())[0][1]
-        filename = thefile.filename
-        content = thefile.read()
+        thefilename = thefile.filename
+        filecontent = thefile.read()
+        # werkzeug refuses to document what type any of the stuff returned from the FileStorage object is so we have to do this bullshit.
+        try:
+            content = filecontent.decode("utf-8")
+        except:
+            content = filecontent
+        try:
+            filename = thefilename.decode("utf-8")
+        except:
+            filename = thefilename
         return filename + "\n\n" + content
     return "no file"
 
