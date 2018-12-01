@@ -35,11 +35,17 @@ def pdf():
     with open("test.md") as md:
         make_pdf(md.read())
     return send_file("output.pdf", attachment_filename="output.pdf")
-    
+
+def get_request_info():
+    args = str(request.args)
+    form = str(request.form)
+    files = str(request.files)
+    output = "args: \n\n " + args + "\n\n form: \n\n" + form + "\n\n files:" + files
+    return output
+
 @app.route("/seerequest", methods=['GET', 'POST'])
 def seerequest():
-    print(json.dumps(request.get_json(force=True)))
-    return "check the logs"
+    return get_request_info()
 
 ## the actual useful bits
 
