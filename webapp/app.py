@@ -64,7 +64,7 @@ def grab_first_md_file():
 def mdfile():
     themd = grab_first_md_file()
     mdtext = themd.read
-    returm mdtext
+    return mdtext
 
 
 ###############################################################
