@@ -133,7 +133,7 @@ def omniconvert():
         infile = make_files_sensible(fls).get("file")
         if infile:
             output_format = request.form.get('format', "html")
-            output = convert(infile, output_format)
+            output = convert_file(infile, output_format)
             if output["is_file"]:
                 filename = output["filename"]
                 return send_file(filename, attachment_filename=filename)
