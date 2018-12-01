@@ -68,7 +68,7 @@ def grab_first_md_file():
 def mdfile():
     themd = grab_first_md_file()
     if themd:
-        mdtext = themd.read
+        mdtext = themd.read()
         return mdtext
     return "no markdown file"
 
