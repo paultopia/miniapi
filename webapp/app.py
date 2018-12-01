@@ -1,5 +1,5 @@
 from flask import Flask, send_file, request
-import pypandoc
+import pypandoc, json
 
 import os, sys, json
 from flask_heroku import Heroku
@@ -35,6 +35,11 @@ def pdf():
     with open("test.md") as md:
         make_pdf(md.read())
     return send_file("output.pdf", attachment_filename="output.pdf")
+    
+@app.route("/see_request", methods=['GET', 'POST'])
+def see_request():
+    rq = json.dumps(request.get_json(force=True))
+    return rq
 
 ## the actual useful bits
 
