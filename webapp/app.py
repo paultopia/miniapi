@@ -42,7 +42,7 @@ def get_request_info():
     files = str(request.files)
     maybe_json = request.get_json(silent=True, cache=False)
     if maybe_json:
-        json = maybe_json
+        json = json.dumps(maybe_json)
     else:
         json = "no json"
     output = "args: \n\n " + args + "\n\n form: \n\n" + form + "\n\n files: \n\n" + files + "\n\njson: \n\n" + json
