@@ -1,7 +1,7 @@
 from flask import Flask, send_file, request
 import pypandoc, json
 from filehandling import make_files_sensible
-from conversions import convert
+from conversions import convert_file, convert_text
 
 import os, sys, json
 from flask_heroku import Heroku
@@ -141,9 +141,21 @@ def omniconvert():
         return "must provide a file with form key 'file'."
     return "no files"
 
+@app.route("/textconvert", methods=["POST"])
+def textconvert():
+    content = request.form.get('text', "ERROR: NO TEXT SENT")
+    input_format = request.form.get("input_format", "md")
+    outfile = request.form.get("filename", "content.html")
+    output = convert_text(content, input_format, outfile)
+    if output["is_file"]:
+        filename = output["filename"]
+        return send_file(filename, attachment_filename=filename)
+    return output["content"]
+
+
 
 ###############################################################
-# NEW
+# OLD
 ###############################################################
 
 
