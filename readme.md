@@ -18,3 +18,5 @@ heroku stack:set container
 git push heroku master
 heroku open
 ```
+
+Currently, I can't get it to build on heroku with texlive-xetex, which pandoc sometimes needs for building special unicode characters (although, weirdly, not always---it can handle curly quotes for example).  It hangs on an interactive element normally, and when I try to add `ENV DEBIAN_FRONTEND noninteractive` to the dockerfile to put a stop to that, it hangs later down in the build process on one of the heroku push things. Forgetting about it now, will perhaps try to build locally and push to container registry later.
