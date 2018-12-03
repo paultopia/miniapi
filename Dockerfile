@@ -2,11 +2,12 @@
 FROM ubuntu:18.04
 
 # to try and stop the texlive-xetex confirmation demands
-ENV DEBIAN_FRONTEND noninteractive
+# ENV DEBIAN_FRONTEND noninteractive
+# seems to cause build to hand
 
 # Install python and pip and pandoc
 RUN apt-get update && apt-get install -y apt-transport-https
-RUN apt-get install -y python3 python3-pip bash pandoc texlive texlive-xetex
+RUN apt-get install -y python3 python3-pip bash pandoc texlive
 ADD ./requirements.txt /tmp/requirements.txt
 
 # Install dependencies
