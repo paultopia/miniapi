@@ -1,9 +1,12 @@
 #Grab the latest ubuntu image
 FROM ubuntu:18.04
 
+# to try and stop the texlive-xetex confirmation demands
+ENV DEBIAN_FRONTEND noninteractive
+
 # Install python and pip and pandoc
 RUN apt-get update && apt-get install -y apt-transport-https
-RUN apt-get install -y python3 python3-pip bash pandoc texlive
+RUN apt-get install -y python3 python3-pip bash pandoc texlive texlive-xetex
 ADD ./requirements.txt /tmp/requirements.txt
 
 # Install dependencies

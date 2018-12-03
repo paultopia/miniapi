@@ -1,10 +1,12 @@
 import pypandoc
 from filehandling import extension
 
+
 def addargs(output_format):
-#    if output_format == "pdf":
-#        return ["--latex-engine=xelatex"]
+    if output_format == "pdf":
+        return ["--latex-engine=xelatex"]
     return []
+
 
 def base_conversion(content, output_format, input_format, outfile):
     if output_format in ["odt", "docx", "epub", "epub3", "pdf"]:
