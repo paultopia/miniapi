@@ -46,3 +46,6 @@ Currently, I can't get it to build on heroku with texlive-xetex, which pandoc so
     - ghostscript: https://www.linuxjournal.com/content/tech-tip-using-ghostscript-convert-and-combine-files 
     - calibre: https://manual.calibre-ebook.com/generated/en/cli-index.html
         - https://calibre-ebook.com/download_linux
+- Flask on DO: https://www.digitalocean.com/community/tutorials/how-to-create-your-first-web-application-using-flask-and-python-3 
+- MOSH on DO: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-mosh-on-a-vps 
+- 
