@@ -20,3 +20,29 @@ heroku open
 ```
 
 Currently, I can't get it to build on heroku with texlive-xetex, which pandoc sometimes needs for building special unicode characters (although, weirdly, not always---it can handle curly quotes for example).  It hangs on an interactive element normally, and when I try to add `ENV DEBIAN_FRONTEND noninteractive` to the dockerfile to put a stop to that, it hangs later down in the build process on one of the heroku push things. Forgetting about it now, will perhaps try to build locally and push to container registry later.
+
+
+----
+
+# Updating to Digital Ocean Since Heroku is in the Shitter
+
+- minimize costs by creating servers on the fly?  Or even if not, might be fun to bundle this as a one-off that can be created from the command line or from curl.  
+- https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04
+- cloud config
+    - https://www.digitalocean.com/community/questions/how-to-edit-and-re-run-cloud-config-user-data 
+    - https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup
+    - https://www.digitalocean.com/community/questions/invoke-a-script-or-command-using-after-creating-a-droplet
+    - https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting
+    - https://docs.digitalocean.com/tutorials/droplet-cloudinit/ 
+    - https://docs.digitalocean.com/products/droplets/how-to/provide-user-data/
+    - https://www.digitalocean.com/community/tutorials/automating-initial-server-setup-with-ubuntu-18-04
+- force APT with Y 
+    - https://askubuntu.com/questions/805067/is-there-a-way-to-force-yes-to-any-prompts-when-installing-from-apt-get-from
+    - (or I could just create a docker image??)   
+        - https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-container-images/ (but this is for app platfrorm not for VPS?  is app platform cheaper? looks like 5 bucks a month.
+        - https://www.digitalocean.com/community/tutorials/how-to-use-the-docker-1-click-install-on-digitalocean looks more appropriate
+        - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04#step-3-using-the-docker-command
+- also want to wrap ghostscript for PDF merging and calibre for ebook conversion. 
+    - ghostscript: https://www.linuxjournal.com/content/tech-tip-using-ghostscript-convert-and-combine-files 
+    - calibre: https://manual.calibre-ebook.com/generated/en/cli-index.html
+        - https://calibre-ebook.com/download_linux
